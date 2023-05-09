@@ -5,55 +5,15 @@ The Ohio State University
 {bintejafar.1, maddela.4, xu.1265, ritter.1492}@osu.edu
 
 Abstract
-There is an increasing interest in studying natural language and computer code together, as
-large corpora of programming texts become
-readily available on the Internet. For example, StackOverflow currently has over 15
-million programming related questions written by 8.5 million users. Meanwhile, there
-is still a lack of fundamental NLP techniques
-for identifying code tokens or software-related
-named entities that appear within natural language sentences. In this paper, we introduce
-a new named entity recognition (NER) corpus for the computer programming domain,
-consisting of 15,372 sentences annotated with
-20 fine-grained entity types. We trained indomain BERT representations (BERTOverflow) on 152 million sentences from StackOverflow, which lead to an absolute increase
-of +10 F1 score over off-the-shelf BERT.
-We also present the SoftNER model which
-achieves an overall 79.10 F1 score for code
-and named entity recognition on StackOverflow data. Our SoftNER model incorporates a
-context-independent code token classifier with
-corpus-level features to improve the BERTbased tagging model.1
+There is an increasing interest in studying natural language and computer code together, as large corpora of programming texts become readily available on the Internet. For example, StackOverflow currently has over 15 million programming related questions written by 8.5 million users. Meanwhile, there is still a lack of fundamental NLP techniques for identifying code tokens or software-related named entities that appear within natural language sentences. In this paper, we introduce a new named entity recognition (NER) corpus for the computer programming domain, consisting of 15,372 sentences annotated with 20 fine-grained entity types. We trained indomain BERT representations (BERTOverflow) on 152 million sentences from StackOverflow, which lead to an absolute increase of +10 F1 score over off-the-shelf BERT. We also present the SoftNER model which achieves an overall 79.10 F1 score for code and named entity recognition on StackOverflow data. Our SoftNER model incorporates a context-independent code token classifier with corpus-level features to improve the BERTbased tagging model.1
 
-1
-
-Figure 1: Examples of software-related named entities
-in a StackOverflow post.
+1 Figure 1: Examples of software-related named entities in a StackOverflow post.
 
 Introduction
 
-Recently there has been significant interest in
-modeling human language together with computer
-code (Quirk et al., 2015; Iyer et al., 2016; Yin and
-Neubig, 2018), as more data becomes available on
-websites such as StackOverflow and GitHub. This
-is an ambitious yet promising direction for scaling up language understanding to richer domains.
-Access to domain-specific NLP tools could help a
-wide range of downstream applications. For example, extracting software knowledge bases from
-
-text (Movshovitz-Attias and Cohen, 2015), developing better quality measurements of StackOverflow posts (Ravi et al., 2014), finding similar questions (Amirreza Shirani, 2019) and more. However, there is a lack of NLP resources and techniques for identifying software-related named entities (e.g., variable names or application names)
-within natural language texts.
-In this paper, we present a comprehensive study
-that investigates the unique challenges of named
-entity recognition in the social computer programming domain. These named entities are often
-ambiguous and have implicit reliance on the accompanied code snippets. For example, the word
-‘list’ commonly refers to a data structure, but
-can also be used as a variable name (Figure 1).
-In order to recognize these entities, we propose
-a software-related named entity recognizer (SoftNER) that utilizes an attention network to combine the local sentence-level context with corpuslevel information extracted from the code snippets. Using our newly annotated corpus of 15,372
-sentences in StackOverflow, we rigorously test
-our proposed SoftNER model, which outperforms
-BiLSTM-CRF model and fine-tuned BERT model
-for identifying 20 types of software-related named
-entities. Our key contributions are the following:
-
+Recently there has been significant interest in modeling human language together with computer code (Quirk et al., 2015; Iyer et al., 2016; Yin and Neubig, 2018), as more data becomes available on websites such as StackOverflow and GitHub. This is an ambitious yet promising direction for scaling up language understanding to richer domains.
+Access to domain-specific NLP tools could help a wide range of downstream applications. For example, extracting software knowledge bases from text (Movshovitz-Attias and Cohen, 2015), developing better quality measurements of StackOverflow posts (Ravi et al., 2014), finding similar questions (Amirreza Shirani, 2019) and more. However, there is a lack of NLP resources and techniques for identifying software-related named entities (e.g., variable names or application names) within natural language texts. In this paper, we present a comprehensive study that investigates the unique challenges of named entity recognition in the social computer programming domain. These named entities are often ambiguous and have implicit reliance on the accompanied code snippets. For example, the word ‘list’ commonly refers to a data structure, but can also be used as a variable name (Figure 1). In order to recognize these entities, we propose a software-related named entity recognizer (SoftNER) that utilizes an attention network to combine the local sentence-level context with corpuslevel information extracted from the code snippets. Using our newly annotated corpus of 15,372
+sentences in StackOverflow, we rigorously test our proposed SoftNER model, which outperforms BiLSTM-CRF model and fine-tuned BERT model for identifying 20 types of software-related named entities. Our key contributions are the following:
 1
 Our code and data are available at: https://
 github.com/jeniyat/StackOverflowNER/
